@@ -11,7 +11,7 @@ class CarCleaner
   attr_accessor :queue, :cars_ready, :cars_in_process
 
   def initialize(queue = [])
-    @queue = []
+    @queue = queue
     @cars_ready = {}
     @cars_in_process = {}
   end
