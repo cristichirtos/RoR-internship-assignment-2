@@ -18,11 +18,11 @@ class CarValidator
   private
 
   def validate_id
-    errors.push("Invalid car identification number.") unless @car.id.match(ID_FORMAT)
+    errors.push('Invalid car identification number.') unless @car.id.match(ID_FORMAT)
   end
 
   def validate_time
-    errors.push("Required time cannot be before the current time.") unless @car.required_time.nil? || @car.required_time > time
+    errors.push('Required time cannot be before the current time.') unless @car.required_time.nil? || @car.required_time > @time
   end
 
 end

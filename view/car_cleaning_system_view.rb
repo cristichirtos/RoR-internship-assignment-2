@@ -1,7 +1,7 @@
 class CarCleaningSystemView
 
   def print_menu
-    puts "Program instructions:"
+    puts 'Program instructions:'
     puts "To add a car, input 'add <car_id> [required_time]'."
     puts "To pick up a car, input 'pickup <car_id>'."
     puts "To view the current simulation time, input 'time'."
@@ -11,7 +11,7 @@ class CarCleaningSystemView
   end
 
   def get_command
-    print ">"
+    print '>'
     STDIN.gets.chomp
   end
 
