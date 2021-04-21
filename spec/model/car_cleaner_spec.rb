@@ -1,13 +1,27 @@
 require_relative '../../model/car_cleaner'
 
 describe CarCleaner do
-  let(:car_cleaner_empty) { CarCleaner.new }
-  let(:car_cleaner_with_data) { CarCleaner.new(["Test", "Another Test"]) }
   
-  it "stores an array as a queue" do
+  context 'with empty data' do
+    subject { CarCleaner.new }
 
-    expect(car_cleaner_empty.queue).to eq []
-    expect(car_cleaner_with_data.queue). to eq ["Test", "Another Test"]
+    it 'stores an array as a queue' do
+      response = subject
+
+      expect(response.queue).to eq []
+    end
+
   end
 
+  context 'with data' do
+    subject { CarCleaner.new(['Test', 'Another Test']) }
+  
+    it 'stores an array as a queue' do
+      response = subject
+      
+      expect(response.queue). to eq ['Test', 'Another Test']
+    end
+
+  end
+  
 end
