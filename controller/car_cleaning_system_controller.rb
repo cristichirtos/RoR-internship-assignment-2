@@ -73,7 +73,7 @@ class CarCleaningSystemController
     car_cleaning_system_view.print_result(result)
   end
 
-  def on_time()
+  def on_time
     car_cleaning_system_view.print_result("Current simulation time: #{car_cleaner_service.time}")
   end
 
@@ -82,7 +82,7 @@ class CarCleaningSystemController
     car_cleaning_system_view.print_result(result)
   end
 
-  def on_queue()
+  def on_queue
     car_cleaning_system_view.print_result("Current cars in queue:\n#{car_cleaner_service.show_queue}")
   end
 

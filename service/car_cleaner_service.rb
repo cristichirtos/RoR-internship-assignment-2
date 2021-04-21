@@ -19,7 +19,6 @@ class CarCleanerService
     position_in_queue = -1
 
     car_cleaner.queue.each do |car_in_queue|
-
       next unless car_in_queue.required_time.nil? || car_in_queue.required_time > car.required_time
       position_in_queue = car_cleaner.queue.index(car_in_queue)
       break
@@ -30,8 +29,8 @@ class CarCleanerService
 
   def simulate_service(number_of_hours)
     @actions = []
-    number_of_hours.times do
 
+    number_of_hours.times do
       if is_open?
         @actions.push("[#{format_time}] Nothing significant happened...") unless handle_car_servicing
       else
@@ -46,13 +45,9 @@ class CarCleanerService
   end
 
   def pick_up_car(car_id)
-
-    if car_cleaner.cars_ready.has_key?(car_id.to_sym)
-      car_cleaner.cars_ready.delete(car_id.to_sym)
-      true
-    else
-      false
-    end
+    return false unless car_cleaner.cars_ready.has_key?(car_id.to_sym)
+    car_cleaner.cars_ready.delete(car_id.to_sym)
+    true
   end
 
   def time_ready(car)
@@ -60,12 +55,11 @@ class CarCleanerService
     time_until_processing = (car_cleaner.queue.index(car) / CarCleaner::MAX_CARS_AT_ONCE) * CarCleaner::CAR_CLEANING_TIME_IN_HOURS
 
     until time_until_processing == 0
-
       time_until_processing -= 1 if is_open? estimated_time
       estimated_time += ONE_HOUR_IN_SECONDS
     end
 
-    return format_time(estimated_time)
+    format_time(estimated_time)
   end
 
   def format_time(time_asked = @time)
@@ -83,9 +77,9 @@ class CarCleanerService
     car_cleaner.cars_in_process.each do |car, enter_time|
 
       if time - enter_time >= ONE_HOUR_IN_SECONDS * CarCleaner::CAR_CLEANING_TIME_IN_HOURS
-
         car_cleaner.cars_ready[car.id.to_sym] = car
         car_cleaner.cars_in_process.delete(car)
+
         @actions.push("[#{format_time}] Car #{car.id} done cleaning & ready for pick up!")
         anything_happened = true
       end
@@ -98,7 +92,7 @@ class CarCleanerService
       anything_happened = true
     end
 
-    return anything_happened
+    anything_happened
   end
 
   def is_open?(time_asked = @time)
