@@ -51,4 +51,82 @@ describe CarCleanerService do
 
   end
 
+  describe '.pick_up_car' do
+    let(:car) { Car.new('CJ30TST') }
+
+    context 'when car does not exist' do
+      it 'fails to pick up the car' do
+        result = subject.pick_up_car(car.id)
+
+        expect(result).to eq false
+      end
+    end
+
+    context 'when car exists' do
+
+      context 'when car is not ready' do
+        it 'fails to pick up the car' do
+          subject.add_car(car)
+          result = subject.pick_up_car(car.id)
+
+          expect(result).to eq false
+        end
+      end
+
+      context 'when car is ready' do
+
+        it 'picks up the car' do
+          subject.add_car(car)
+          subject.simulate_service(2)
+          result = subject.pick_up_car(car.id)
+
+          expect(result).to eq true
+        end
+
+        it 'allows the user to pick up the car later' do
+          subject.add_car(car)
+          subject.simulate_service(7 * 24) # a week later
+          result = subject.pick_up_car(car.id)
+
+          expect(result).to eq true
+        end
+
+      end
+    end
+  end
+
+  describe '.time_ready' do
+    let(:car) { Car.new('CJ30TST') }
+
+    it 'gives an estimated time when car will be ready' do
+      subject.add_car(car)
+      result = subject.time_ready(car)
+
+      expect(result).to eq '20/04/2021 10:00 AM'
+    end
+
+  end
+
+  describe '.format_time' do
+    let(:time) { Time.now }
+
+    it 'formats a Time object' do
+      result = subject.format_time(time)
+
+      expect(result).to eq '20/04/2021 08:00 AM'
+    end
+
+  end
+
+  describe '.show_queue' do
+    let(:car) { Car.new('CJ30TST') }
+
+    it 'shows the current queue' do
+      subject.add_car(car)
+      result = subject.show_queue
+
+      expect(result[0].id).to eq 'CJ30TST'
+    end
+  
+  end
 end
