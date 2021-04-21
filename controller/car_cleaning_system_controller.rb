@@ -16,32 +16,32 @@ class CarCleaningSystemController
     car_cleaning_system_view.print_menu
     input = car_cleaning_system_view.get_command
 
-    until input == "exit"
+    until input == 'exit'
       words = input.split(" ")
       command = words[0]
 
       case command
-      when "add"
+      when 'add'
         id = words[1]
         time = words[2]
         on_add(id, time)
 
-      when "pickup"
+      when 'pickup'
         id = words[1]
         on_pickup(id)
 
-      when "time"
+      when 'time'
         on_time
 
-      when "fwd"
+      when 'fwd'
         number_of_hours = words[1].to_i
         on_fwd(number_of_hours)
   
-      when "queue"
+      when 'queue'
         on_queue
       
       else 
-        car_cleaning_system_view.print_result("Unknown command. Try again.")
+        car_cleaning_system_view.print_result('Unknown command. Try again.')
       end
       
       input = car_cleaning_system_view.get_command
@@ -64,7 +64,7 @@ class CarCleaningSystemController
     end
 
   rescue ArgumentError
-    car_cleaning_system_view.print_result("Invalid date format.")
+    car_cleaning_system_view.print_result('Invalid date format.')
   end
 
   def on_pickup(id)
