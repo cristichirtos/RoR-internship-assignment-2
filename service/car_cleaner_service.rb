@@ -14,8 +14,8 @@ class CarCleanerService
   end
 
   def add_car(car)
-    # if the client did not specify the time they need the car, I consider it to be the end of the day
-    car.required_time = Time.parse(time.strftime("%Y-%m-%dT#{today_closing_hour}:00:00%z")) if car.required_time.nil?
+    end_of_day = Time.parse(time.strftime("%Y-%m-%dT#{today_closing_hour}:00:00%z"))
+    car.required_time = end_of_day if car.required_time.nil?
     position_in_queue = -1
 
     car_cleaner.queue.each do |car_in_queue|
@@ -46,6 +46,7 @@ class CarCleanerService
 
   def pick_up_car(car_id)
     return false unless car_cleaner.cars_ready.has_key?(car_id.to_sym)
+
     car_cleaner.cars_ready.delete(car_id.to_sym)
     true
   end
@@ -62,7 +63,7 @@ class CarCleanerService
     format_time(estimated_time)
   end
 
-  def format_time(time_asked = @time)
+  def format_time(time_asked = time)
     time_asked.strftime("%d/%m/%Y %I:%M %p")
   end
 
@@ -95,7 +96,7 @@ class CarCleanerService
     anything_happened
   end
 
-  def is_open?(time_asked = @time)
+  def is_open?(time_asked = time)
     if time_asked.saturday?
       time_asked.hour.between?(CarCleaner::SATURDAY_OPENING_HOUR, CarCleaner::SATURDAY_CLOSING_HOUR)
     elsif time_asked.sunday?
@@ -107,8 +108,9 @@ class CarCleanerService
 
   def today_closing_hour
     return CarCleaner::SATURDAY_CLOSING_HOUR if @time.saturday?
+
     return CarCleaner::SUNDAY_CLOSING_HOUR if @time.sunday?
+
     CarCleaner::WEEKDAY_CLOSING_HOUR
   end
-
 end

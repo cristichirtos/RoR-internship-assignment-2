@@ -15,5 +15,4 @@ class CarCleaner
     @cars_ready = {}
     @cars_in_process = {}
   end
-  
 end

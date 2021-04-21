@@ -6,5 +6,4 @@ class Car
     @id = id
     @required_time = required_time
   end
-
 end

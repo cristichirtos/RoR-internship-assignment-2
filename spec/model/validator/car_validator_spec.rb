@@ -54,6 +54,5 @@ describe CarValidator do
 
       expect(response).to eq []
     end
-
   end
 end

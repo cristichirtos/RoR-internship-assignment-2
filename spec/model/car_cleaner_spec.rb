@@ -21,7 +21,5 @@ describe CarCleaner do
       
       expect(response.queue). to eq ['Test', 'Another Test']
     end
-
   end
-  
 end

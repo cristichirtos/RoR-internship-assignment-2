@@ -127,6 +127,5 @@ describe CarCleanerService do
 
       expect(result[0].id).to eq 'CJ30TST'
     end
-  
   end
 end

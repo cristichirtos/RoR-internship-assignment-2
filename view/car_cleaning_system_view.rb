@@ -18,5 +18,4 @@ class CarCleaningSystemView
   def print_result(result)
     puts result
   end
-  
 end

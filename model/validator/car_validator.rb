@@ -24,5 +24,4 @@ class CarValidator
   def validate_time
     errors.push('Required time cannot be before the current time.') unless @car.required_time.nil? || @car.required_time > @time
   end
-
 end
