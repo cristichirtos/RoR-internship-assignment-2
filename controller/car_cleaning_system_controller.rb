@@ -83,6 +83,6 @@ class CarCleaningSystemController
   end
 
   def on_queue
-    car_cleaning_system_view.print_result("Current cars in queue:\n#{car_cleaner_service.show_queue}")
+    car_cleaning_system_view.print_result("Current cars in queue: #{car_cleaner_service.show_queue}")
   end
 end

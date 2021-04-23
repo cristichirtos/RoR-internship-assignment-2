@@ -68,7 +68,9 @@ class CarCleanerService
   end
 
   def show_queue
-    car_cleaner.queue
+    string_queue = ""
+    car_cleaner.queue.each { |car| string_queue += "#{car.id} "}
+    string_queue
   end
 
   private
