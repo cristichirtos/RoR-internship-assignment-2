@@ -27,7 +27,6 @@ describe CarCleanerService do
       expect(result[1].id).to eq 'CJ30TST'
       expect(result[2].id).to eq 'CJ31TST'
     end
-
   end
 
   describe '.simulate_service' do
@@ -48,7 +47,6 @@ describe CarCleanerService do
 
       expect(result[11]).to eq '[20/04/2021 07:00 PM] Car cleaning service is closed until tomorrow morning.'
     end
-
   end
 
   describe '.pick_up_car' do
@@ -90,7 +88,6 @@ describe CarCleanerService do
 
           expect(result).to eq true
         end
-
       end
     end
   end
@@ -104,7 +101,6 @@ describe CarCleanerService do
 
       expect(result).to eq '20/04/2021 10:00 AM'
     end
-
   end
 
   describe '.format_time' do
@@ -115,7 +111,6 @@ describe CarCleanerService do
 
       expect(result).to eq '20/04/2021 08:00 AM'
     end
-
   end
 
   describe '.show_queue' do
@@ -123,9 +118,9 @@ describe CarCleanerService do
 
     it 'shows the current queue' do
       subject.add_car(car)
-      result = subject.show_queue
+      result = subject.show_queue.split(' ')
 
-      expect(result[0].id).to eq 'CJ30TST'
+      expect(result[0]).to eq 'CJ30TST'
     end
   end
 end
